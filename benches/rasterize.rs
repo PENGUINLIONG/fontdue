@@ -8,12 +8,11 @@ type SetupFunction = fn(&mut BenchmarkGroup<WallTime>, &str, &[u8], f32);
 
 // Scratch pad for glyphs: ⅞ g
 const MESSAGE: &str = "Sphinx of black quartz, judge my vow.";
-const FONTS: [(&str, &[u8]); 2] = [
+const FONTS: [(&str, &[u8]); 1] = [
     ("truetype", include_bytes!("../resources/fonts/Exo2-Regular.ttf")),
-    ("opentype", include_bytes!("../resources/fonts/Exo2-Regular.otf")),
 ];
 const SIZES: [f32; 6] = [10.0, 20.0, 40.0, 80.0, 160.0, 200.0];
-const FUNCTIONS: [SetupFunction; 4] = [setup_rusttype, setup_ab_glyph, setup_fontdue, setup_freetype];
+const FUNCTIONS: [SetupFunction; 1] = [setup_fontdue];
 
 fn setup(c: &mut Criterion) {
     let mut group = c.benchmark_group("rasterize");

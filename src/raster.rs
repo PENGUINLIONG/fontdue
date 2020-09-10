@@ -20,7 +20,7 @@ impl Raster {
         Raster {
             w,
             h,
-            a: vec![0.0; w * h + 3],
+            a: vec![0.0; w * h],
         }
     }
 
@@ -96,6 +96,10 @@ impl Raster {
 
     #[inline(always)]
     pub fn get_bitmap(&self) -> Vec<u8> {
-        crate::platform::get_bitmap(&self.a, self.w * self.h)
+        let len = self.a.len();
+        let mut out = Vec::with_capacity(len);
+        unsafe { out.set_len(len); }
+        crate::platform::get_bitmap(&self.a, &mut out);
+        out
     }
 }
